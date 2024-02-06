@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koniec Quizu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d38d8d; /* Różowe tło */
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: #ff0000; /* Czerwony kolor dla nagłówka */
+            font-size: 36px;
+        }
+
+        .heart {
+            color: #ff0000; /* Czerwony kolor serc */
+            font-size: 95px;
+            animation: pulse 1s infinite alternate; /* Animacja pulsacji serc */
+        }
+
+        @keyframes pulse {
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        .result {
+            color: #ff6666; /* Czerwony kolor wyniku */
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .love-message {
+            color: #ff0000;
+            font-size: 74px;
+            margin-top: 20px;
+        }
+
+        /* Styl dla poprawnej odpowiedzi */
+        .correct-answer {
+            color: #0bc248
+        }
+    </style>
+</head>
+<body>
+    <h1>Podsumowanie Quizu</h1>
+    <ul>
+        {% for question in questions %}
+            <li>
+                <strong>{{ question.question }}</strong><br>
+                Poprawna odpowiedź: 
+                {% if question.correct_answer == "Odpowiedź użytkownika" %}
+                    <span class="correct-answer">{{ question.correct_answer }}</span>
+                {% else %}
+                    {{ question.correct_answer }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <h1>Brawo kruszynko!</h1>
+    <div class="heart">❤️❤️❤️❤️</div>
+    <p>Twój wynik to: {{ score }}/{{ total_questions }}</p>
+    <div class="love-message">Zostaniesz moją walentynką? O.o </div>
+</body>
+</html>

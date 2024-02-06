@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Walentynkowy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffcccc; /* Różowe tło */
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff6666; /* Czerwony kolor dla nagłówka */
+            font-size: 36px;
+        }
+
+        form {
+            background-color: #ffffff; /* Białe tło formularza */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #ff6666; /* Czerwony kolor przycisku */
+            color: #ffffff; /* Biały kolor tekstu przycisku */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff9999; /* Różowe tło przycisku po najechaniu myszką */
+        }
+
+        .result {
+            color: #ff6666; /* Czerwony kolor wyniku */
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Walentynkowy</h1>
+    <form method="POST">
+        <h3>{{ current_question.question }}</h3>
+        {% for option in current_question.options %}
+        <input type="radio" name="answer" value="{{ option }}"> <label>{{ option }}</label><br>
+        {% endfor %}
+        <br>
+        <button type="submit">Sprawdź odpowiedź</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="result">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
